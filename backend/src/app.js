@@ -1,5 +1,6 @@
 const express = require('express'); //importa o modulo express para a variavel
 const routes = require('./routes');
+const {errors} = require('celebrate');
 const cors = require('cors');
 
 const app = express(); //essa variavel armazena a aplicacao
@@ -7,6 +8,7 @@ const app = express(); //essa variavel armazena a aplicacao
 app.use(cors());  //CORS determina quem pode acessar a aplicacao
 app.use(express.json());    //informa ao express converter requisicoes json em objetos js
 app.use(routes);
+app.use(errors());   //habilita informacao de erros (diferentes de code 500, qdo o servidor n sabe oq fazer). como, por exemplo, bad request e oq falhou
 
 /**
  * Metodos HTTP
@@ -33,4 +35,5 @@ app.use(routes);
  * Request Body: Corpo da requisicao, uitilziado para criar ou alterar recursos
  */
 
-app.listen(3333) //localhost:3333 acessa a aplicacao que esta ouvindo esta porta
+ //app.listen(3333) //localhost:3333 acessa a aplicacao que esta ouvindo esta porta
+module.exports = app;

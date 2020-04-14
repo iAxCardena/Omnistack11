@@ -1,5 +1,5 @@
+const generateUniqueId = require('../utils/generateUniqueId');   
 const connection = require('../database/connection');
-const crypto = require('crypto');   //biblioteca para criptografia que possui metodo de geracao randomica
 
 module.exports = {
     async index(request, response)  {
@@ -11,7 +11,7 @@ module.exports = {
     async create(request, response) {
         const { name, email, whatsapp, city, uf } = request.body;
 
-        const id = crypto.randomBytes(4).toString('HEX');   //gera 4 bytes de caracteres hexadecimais para o id da ong
+        const id = generateUniqueId();   //chama uma funcao que gera 4 bytes de caracteres hexadecimais para o id da ong
         
         await connection('ongs').insert({   //como a insercao pode demorar, o await (junto com asynt na definicao da funcao) faz com que espere o termino da execucao da insercao para depois continuar
             id,
